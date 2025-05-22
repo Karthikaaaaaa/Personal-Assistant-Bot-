@@ -1,12 +1,19 @@
 import streamlit as st
-from src.utils.intent_parser import IntentParser
+import os
+import sys
+
+# Get the absolute path to the project root
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, project_root)
+
+from utils.intent_parser import IntentParser
 import json
 
 # Initialize the intent parser
 parser = IntentParser()
 
 # Streamlit app configuration
-st.set_page_config(page_title="Quaint Assistant", page_icon="📜", layout="centered")
+st.set_page_config(page_title="Personal Assistant", layout="centered")
 
 # Load custom CSS
 with open("frontend/styles.css") as f:
@@ -16,14 +23,13 @@ with open("frontend/styles.css") as f:
 st.markdown(
     """
     <div class="header">
-        <h1>📜 Quaint Assistant</h1>
+        <h1>Personal Assistant</h1>
         <p>Your charming personal assistant for all your needs</p>
     </div>
     """,
     unsafe_allow_html=True
 )
 
-# User input
 with st.form(key="user_input_form"):
     user_input = st.text_area(
         "How may I assist you today?",
@@ -63,6 +69,17 @@ if submit_button and user_input:
                     entities_str = json.dumps(result['key_entities'], indent=2)
                     st.markdown(f"<pre class='output-box'>{entities_str}</pre>", unsafe_allow_html=True)
 
+                # Display conflicts
+                if result.get('conflict'):
+                    st.markdown("<h4>Intent Conflict</h4>", unsafe_allow_html=True)
+                    st.markdown(f"<div class='output-box'><p>⚠️ {result['conflict']}</p></div>", unsafe_allow_html=True)
+
+                # Display validation errors
+                if result.get('validation_errors'):
+                    st.markdown("<h4>Validation Issues</h4>", unsafe_allow_html=True)
+                    for error in result['validation_errors']:
+                        st.markdown(f"<div class='output-box'><p>⚠️ {error}</p></div>", unsafe_allow_html=True)
+
                 # Display follow-up questions (intent-specific)
                 if result['follow_up_questions']:
                     st.markdown(f"<h4>Follow-Up Questions for {display_category}</h4>", unsafe_allow_html=True)
@@ -75,7 +92,7 @@ if submit_button and user_input:
                     for web_result in result['web_search_results']:
                         st.markdown(
                             f"""
-                            <div class="output-box">
+                            <div class='output-box'>
                                 <h5>{web_result['title']}</h5>
                                 <p>{web_result['snippet']}</p>
                                 <a href='{web_result['url']}' target='_blank'>Visit Link</a>
@@ -83,5 +100,11 @@ if submit_button and user_input:
                             """,
                             unsafe_allow_html=True
                         )
+
+            # Display JSON output with copy button
+            st.markdown("<h4>JSON Output</h4>", unsafe_allow_html=True)
+            json_output = json.dumps(results, indent=2)
+            st.code(json_output, language="json")
+
         except Exception as e:
-            st.error(f"Error processing request: {e}") 
+            st.error(f"Error processing request: {e}")

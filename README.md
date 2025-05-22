@@ -1,9 +1,104 @@
 # AI Personal Assistant Bot
 
 ## Description
-This project aims to build a personal assistant bot that processes fuzzy user input (e.g., "Need a sunset-view table for two tonight; gluten-free menu a must") and converts it into structured data (JSON).
+This project implements an intelligent personal assistant bot that processes natural language user inputs and converts them into structured data. The bot can handle various types of requests including dining reservations, travel bookings, cab services, and gift suggestions.
 
-## Setup
-1. Clone the repo:
+## Features
+- Natural language processing of user inputs
+- Intent classification (dining, travel, gifting, cab_booking)
+- Entity extraction (dates, locations, preferences, etc.)
+- Smart follow-up questions generation
+- Web search integration for non-standard queries
+- Input validation and error handling
+- Date normalization and validation
+- Location validation
+- Party size validation
+
+## Project Structure
+```
+AI-Assignment/
+├── frontend/
+│   ├── app.py          # Flask web application
+│   ├── styles.css      # Frontend styling
+│   └── __init__.py
+├── utils/
+│   ├── intent_parser.py    # Core intent parsing logic
+│   └── __init__.py
+├── services/
+│   ├── llm_service.py      # LLM integration service
+│   ├── search_service.py   # Web search service
+│   └── __init__.py
+└── config/
+    ├── settings.py         # Configuration settings
+    └── __init__.py
+```
+
+## Prerequisites
+- Python 3.8 or higher
+- pip (Python package manager)
+- Virtual environment (recommended)
+
+## Setup Instructions
+
+1. Clone the repository:
    ```bash
-   git clone https://github.com/Karthikaaaaaa/AI-Assignment.git
+   git clone https://github.com/Karthikaaaaaa/Personal-Assistant-Bot-.git
+   cd Personal-Assistant-Bot
+   ```
+
+2. Create and activate a virtual environment:
+   ```bash
+   # Windows
+   python -m venv venv
+   .\venv\Scripts\activate
+
+   # Linux/Mac
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+
+3. Install required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Configure environment variables:
+   - Create a `.env` file in the root directory
+   - Add necessary API keys and configuration settings
+
+5. Run the application:
+   ```bash
+   # From the frontend directory
+   python app.py
+   ```
+
+## Usage Examples
+
+1. Dining Reservation:
+   ```
+   "Need a sunset-view table for two tonight; gluten-free menu a must"
+   ```
+
+2. Travel Booking:
+   ```
+   "Book a flight to Paris for next week, budget around $1000"
+   ```
+
+3. Cab Booking:
+   ```
+   "Need a cab from airport to downtown tomorrow at 3 PM"
+   ```
+
+4. Gift Suggestions:
+   ```
+   "Suggest a birthday gift for my wife, budget $200"
+   ```
+
+## API Endpoints
+
+- `POST /process_input`: Process user input and return structured data
+  - Request body: `{"user_input": "your query here"}`
+  - Response: JSON containing intents, entities, and follow-up questions
+
+
+
