@@ -93,6 +93,11 @@ AI Personal Assistant Bot/
    "Suggest a birthday gift for my wife, budget $200"
    ```
 
+5. Other:
+    ```
+   "Update my role in LinkedIn"
+   ```
+
 ## API Endpoints
 
 - `POST /process_input`: Process user input and return structured data
