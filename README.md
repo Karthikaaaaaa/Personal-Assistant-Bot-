@@ -16,20 +16,20 @@ This project implements an intelligent personal assistant bot that processes nat
 
 ## Project Structure
 ```
-AI-Assignment/
+AI Personal Assistant Bot/
 ├── frontend/
-│   ├── app.py          # Flask web application
-│   ├── styles.css      # Frontend styling
+│   ├── app.py          
+│   ├── styles.css      
 │   └── __init__.py
 ├── utils/
-│   ├── intent_parser.py    # Core intent parsing logic
+│   ├── intent_parser.py    
 │   └── __init__.py
 ├── services/
-│   ├── llm_service.py      # LLM integration service
-│   ├── search_service.py   # Web search service
+│   ├── llm_service.py      
+│   ├── search_service.py   
 │   └── __init__.py
 └── config/
-    ├── settings.py         # Configuration settings
+    ├── settings.py         
     └── __init__.py
 ```
 
