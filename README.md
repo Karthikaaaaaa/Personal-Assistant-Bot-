@@ -100,5 +100,7 @@ AI Personal Assistant Bot/
   - Request body: `{"user_input": "your query here"}`
   - Response: JSON containing intents, entities, and follow-up questions
 
+I have attached a pdf for reference, it has inputs and outputs of a case where in multiple intents are present.
+
 
 
