@@ -7,7 +7,7 @@ This project implements an intelligent personal assistant bot that processes nat
 - Natural language processing of user inputs
 - Intent classification (dining, travel, gifting, cab_booking)
 - Entity extraction (dates, locations, preferences, etc.)
-- follow-up questions generation
+- Follow-up questions generation
 - Web search integration for non-standard queries
 
 
