@@ -91,8 +91,7 @@ class IntentParser:
         ]#please include offensive words here.
         # Define impossible/fictional locations
         self.invalid_locations = [
-            "narnia", "hogwarts", "moon", "mars", "neverland", "middle earth", "the past"
-        ]
+        ]#please add invalid locations here, like Moon, Mars, Narnia, etc
 
     def _build_graph(self):
         graph = StateGraph(State)
