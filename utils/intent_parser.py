@@ -26,20 +26,6 @@ def normalize_date(date_str: str, current_date: datetime) -> str:
     for misspelled, correct in misspellings.items():
         date_str = date_str.replace(misspelled, correct)
 
-    # Non-English date terms (basic mapping)
-    non_english_days = {
-        "月曜日": "monday",  # Japanese: Monday
-        "火曜日": "tuesday",
-        "水曜日": "wednesday",
-        "木曜日": "thursday",
-        "金曜日": "friday",
-        "土曜日": "saturday",
-        "日曜日": "sunday"
-    }
-    for non_english, english in non_english_days.items():
-        if non_english in date_str:
-            date_str = date_str.replace(non_english, english)
-
     # Resolve relative dates
     today = current_date.replace(hour=0, minute=0, second=0, microsecond=0)
     if date_str in ["today", "tonight"]:
@@ -102,9 +88,7 @@ class IntentParser:
         self.current_date = datetime.now()  # Current date: May 22, 2025, 05:36 PM IST
         # Define offensive keywords for filtering
         self.offensive_keywords = [
-            "fuck", "shit", "bitch", "asshole", "daddy", "pussy", "dick", "cock", "cunt",
-            "phuck", "f*ck"
-        ]
+        ]#please include offensive words here.
         # Define impossible/fictional locations
         self.invalid_locations = [
             "narnia", "hogwarts", "moon", "mars", "neverland", "middle earth", "the past"
